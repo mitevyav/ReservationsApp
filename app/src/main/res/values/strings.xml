@@ -5,4 +5,5 @@
     <string name="number_of_guests">Number of Guests</string>
     <string name="name">Name</string>
     <string name="e_mail">E-mail</string>
+    <string name="add_reservation_action">Add reservation</string>
 </resources>
