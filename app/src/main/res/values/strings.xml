@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Reservations</string>
     <string name="add_reservation_label">Add Reservation</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="number_of_guests">Number of Guests</string>
+    <string name="name">Name</string>
+    <string name="e_mail">E-mail</string>
 </resources>
