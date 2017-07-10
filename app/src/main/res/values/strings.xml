@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Reservations</string>
+    <string name="add_reservation_label">Add Reservation</string>
 </resources>
