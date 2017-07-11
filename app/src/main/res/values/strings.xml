@@ -11,4 +11,5 @@
     <string name="blank_fields">Please fill all fields!</string>
     <string name="guest_name_label">Name: %1$s</string>
     <string name="number_of_guests_label">Number of Guests: %d</string>
+    <string name="preferences_label">Preferences</string>
 </resources>

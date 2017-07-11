@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.example.yavor.reservations.data.ReservationsContract.ReservationEntry;
@@ -45,6 +48,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startAddReservationActivity();
                 break;
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.preferences:
+                launchPreferences();
+                return false;
+        }
+
+        return (super.onOptionsItemSelected(item));
+    }
+
+    private void launchPreferences() {
+
     }
 
     private void startAddReservationActivity() {
