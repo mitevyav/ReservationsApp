@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Reservations</string>
     <string name="add_reservation_label">Add Reservation</string>
+
+
     <string name="phone_number">Phone Number</string>
     <string name="number_of_guests">Number of Guests</string>
     <string name="name">Name</string>
@@ -11,5 +13,9 @@
     <string name="blank_fields">Please fill all fields!</string>
     <string name="guest_name_label">Name: %1$s</string>
     <string name="number_of_guests_label">Number of Guests: %d</string>
+
     <string name="preferences_label">Preferences</string>
+    <string name="email_pref_key">email_pref_key</string>
+    <string name="email_pref_title">E-mail</string>
+    <string name="email_hint">john.doe@provider.com</string>
 </resources>

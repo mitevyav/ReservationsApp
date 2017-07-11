@@ -14,6 +14,7 @@ import android.view.View;
 
 import com.example.yavor.reservations.data.ReservationsContract.ReservationEntry;
 import com.example.yavor.reservations.data.ReservationsDbHelper;
+import com.example.yavor.reservations.preferences.SettingsActivity;
 import com.example.yavor.reservations.reservationinput.AddReservation;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -69,7 +70,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void launchPreferences() {
-
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
     }
 
     private void startAddReservationActivity() {

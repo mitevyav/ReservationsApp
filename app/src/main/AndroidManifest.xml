@@ -19,6 +19,7 @@
         <activity
             android:name=".reservationinput.AddReservation"
             android:label="@string/add_reservation_label" />
+        <activity android:name=".preferences.SettingsActivity"></activity>
     </application>
 
 </manifest>
