@@ -26,9 +26,9 @@ public class ReservationsDbHelper extends SQLiteOpenHelper {
                 ReservationEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 ReservationEntry.COLUMN_GUEST_NAME + " TEXT NOT NULL, " +
                 ReservationEntry.COLUMN_NUMBER_OF_GUESTS + " INTEGER NOT NULL, " +
-                ReservationEntry.COLUMN_TIMESTAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP" +
+                ReservationEntry.COLUMN_TIMESTAMP + " TEXT NOT NULL," +
                 ReservationEntry.COLUMN_EMAIL + " TEXT NOT NULL, " +
-                ReservationEntry.COLUMN_PHONE_NUMBER + " TEXT NOT NULL, " +
+                ReservationEntry.COLUMN_PHONE_NUMBER + " TEXT NOT NULL " +
                 "); ";
         sqLiteDatabase.execSQL(SQL_CREATE_RESERVATIONS_TABLE);
 
