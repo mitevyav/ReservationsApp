@@ -30,10 +30,7 @@ public class AddReservation extends AppCompatActivity implements DatePickerDialo
     private static final String DATE_PICKER_FRAGMENT_TAG = "timePicker";
     private static final String TIME_PICKER_FRAGMENT_TAG = "datePicker";
 
-    private static final String DATE_FORMAT = "d MMM";
-
-    private String formattedDate = "";
-    private String formattedTime = "";
+    private static final String DATE_FORMAT = "d MMM hh:mm";
 
     private EditText guestNameEditText;
     private EditText phoneNumberEditText;
@@ -44,6 +41,11 @@ public class AddReservation extends AppCompatActivity implements DatePickerDialo
     private String phoneNumberInput;
     private String numberOfGuestsInput;
     private String emailInput;
+
+    private boolean timeSet = false;
+    private boolean dateSet = false;
+
+    private Date date = new Date();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,13 +104,16 @@ public class AddReservation extends AppCompatActivity implements DatePickerDialo
         contentValues.put(ReservationEntry.COLUMN_NUMBER_OF_GUESTS, String.valueOf(numberOfGuestsInput));
         contentValues.put(ReservationEntry.COLUMN_PHONE_NUMBER, phoneNumberInput);
         contentValues.put(ReservationEntry.COLUMN_EMAIL, emailInput);
-        contentValues.put(ReservationEntry.COLUMN_TIMESTAMP, formattedDate + "," + formattedTime);
+        contentValues.put(ReservationEntry.COLUMN_TIMESTAMP, formatDate());
         return contentValues;
     }
 
     private boolean isBlankFields() {
         if (TextUtils.isEmpty(guestNameInput) || TextUtils.isEmpty(phoneNumberInput) ||
                 TextUtils.isEmpty(numberOfGuestsInput) || TextUtils.isEmpty(emailInput)) {
+            return true;
+        }
+        if (!timeSet || !dateSet) {
             return true;
         }
         return false;
@@ -133,8 +138,7 @@ public class AddReservation extends AppCompatActivity implements DatePickerDialo
     }
 
 
-    private String formatDate(int year, int month, int day) {
-        Date date = new Date(year, month, day);
+    private String formatDate() {
         SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT);
         String strDate = format.format(date);
         return strDate;
@@ -142,11 +146,16 @@ public class AddReservation extends AppCompatActivity implements DatePickerDialo
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        formattedDate = formatDate(year, month, dayOfMonth);
+        dateSet = true;
+        date.setYear(year);
+        date.setMonth(month);
+        date.setDate(dayOfMonth);
     }
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        formattedTime = hourOfDay + ":" + minute;
+        timeSet = true;
+        date.setHours(hourOfDay);
+        date.setMinutes(minute);
     }
 }
