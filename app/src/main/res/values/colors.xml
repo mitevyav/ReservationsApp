@@ -6,4 +6,7 @@
     <color name="colorAccent">#FFEB3B</color>
 
     <color name="list_item_text_color">#000000</color>
+
+    <color name="buttons_text_color">#ffffff</color>
+    <color name="buttons_background_color">#0091EA</color>
 </resources>

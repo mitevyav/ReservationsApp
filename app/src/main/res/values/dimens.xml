@@ -2,4 +2,5 @@
 <resources>
     <dimen name="fab_button_margin">16dp</dimen>
     <dimen name="activity_margin">16dp</dimen>
+    <dimen name="add_reservation_items_bottom_margin">16dp</dimen>
 </resources>
