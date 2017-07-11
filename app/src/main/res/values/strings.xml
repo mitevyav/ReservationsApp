@@ -33,4 +33,5 @@
     </string>
     <string name="no_mails_toast">There are no email clients installed.</string>
     <string name="email_chooser_titles">Send mail...</string>
+    <string name="settings_label">Settings</string>
 </resources>
