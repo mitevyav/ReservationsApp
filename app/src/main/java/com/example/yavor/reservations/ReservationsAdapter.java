@@ -21,14 +21,13 @@ public class ReservationsAdapter extends RecyclerView.Adapter<ReservationsAdapte
 
     private Cursor cursor;
 
-    public ReservationsAdapter(Context context, Cursor cursor) {
+    public ReservationsAdapter(Context context) {
         this.context = context;
-        this.cursor = cursor;
     }
 
     public void swapCursor(Cursor newCursor) {
-        if (cursor != null) {
-            cursor.close();
+        if (this.cursor == newCursor) {
+            return;
         }
 
         this.cursor = newCursor;
@@ -56,7 +55,7 @@ public class ReservationsAdapter extends RecyclerView.Adapter<ReservationsAdapte
         String name = cursor.getString(cursor.getColumnIndex(ReservationEntry.COLUMN_GUEST_NAME));
         int numberOfGuests = cursor.getInt(cursor.getColumnIndex(ReservationEntry.COLUMN_NUMBER_OF_GUESTS));
         String timestamp = cursor.getString(cursor.getColumnIndex(ReservationEntry.COLUMN_TIMESTAMP));
-        long id = cursor.getLong(cursor.getColumnIndex(ReservationEntry._ID));
+        int id = cursor.getInt(cursor.getColumnIndex(ReservationEntry._ID));
 
         holder.name.setText(context.getString(R.string.guest_name_label, name));
         holder.guestNumber.setText(context.getString(R.string.number_of_guests_label, numberOfGuests));
@@ -67,6 +66,9 @@ public class ReservationsAdapter extends RecyclerView.Adapter<ReservationsAdapte
 
     @Override
     public int getItemCount() {
+        if (cursor == null) {
+            return 0;
+        }
         return cursor.getCount();
     }
 
