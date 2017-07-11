@@ -9,4 +9,6 @@
     <string name="pick_date">Pick Date</string>
     <string name="pick_time">PickTime</string>
     <string name="blank_fields">Please fill all fields!</string>
+    <string name="guest_name_label">Name: %1$s</string>
+    <string name="number_of_guests_label">Number of Guests: %d</string>
 </resources>

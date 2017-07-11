@@ -1,20 +1,39 @@
 package com.example.yavor.reservations;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.example.yavor.reservations.data.ReservationsContract.ReservationEntry;
+import com.example.yavor.reservations.data.ReservationsDbHelper;
 import com.example.yavor.reservations.reservationinput.AddReservation;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private static final String LOG_TAG = MainActivity.class.getCanonicalName();
+    private ReservationsAdapter adapter;
+    private SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.reservations_list_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        ReservationsDbHelper dbHelper = new ReservationsDbHelper(this);
+        db = dbHelper.getWritableDatabase();
+
+        Cursor cursor = getAllReservations();
+
+        adapter = new ReservationsAdapter(this, cursor);
+        recyclerView.setAdapter(adapter);
+
 
         findViewById(R.id.fab).setOnClickListener(this);
     }
@@ -33,4 +52,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
 
+
+    private Cursor getAllReservations() {
+        return db.query(
+                ReservationEntry.TABLE_NAME,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+    }
 }
