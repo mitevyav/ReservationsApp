@@ -20,6 +20,11 @@
             android:name=".reservationinput.AddReservation"
             android:label="@string/add_reservation_label" />
         <activity android:name=".preferences.SettingsActivity"></activity>
+
+        <provider
+            android:name="com.example.yavor.reservations.data.ReservationContentProvider"
+            android:authorities="com.example.yavor.reservations"
+            android:exported="false"/>
     </application>
 
 </manifest>
