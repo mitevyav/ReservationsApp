@@ -7,13 +7,16 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.yavor.reservations.data.ReservationsContract.ReservationEntry;
 import com.example.yavor.reservations.data.ReservationsDbHelper;
+import com.example.yavor.reservations.preferences.PreferenceUtils;
 import com.example.yavor.reservations.preferences.SettingsActivity;
 import com.example.yavor.reservations.reservationinput.AddReservation;
 
@@ -75,8 +78,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void startAddReservationActivity() {
+        if(!hasAdminEmail()){
+            hasToEnterAdminEmailToast();
+            return;
+        }
         Intent intent = new Intent(this, AddReservation.class);
         startActivity(intent);
+    }
+
+    private void hasToEnterAdminEmailToast() {
+        Toast.makeText(this, getString(R.string.no_admin_mail_toast), Toast.LENGTH_SHORT).show();
     }
 
 
@@ -90,5 +101,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 null,
                 null
         );
+    }
+
+    private boolean hasAdminEmail() {
+        return !TextUtils.isEmpty(PreferenceUtils.getAdminEmail(this));
     }
 }

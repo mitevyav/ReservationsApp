@@ -1,12 +1,13 @@
 <resources>
     <string name="app_name">Reservations</string>
     <string name="add_reservation_label">Add Reservation</string>
+    <string name="no_admin_mail_toast">You have to enter admin email in the preferences!</string>
 
 
     <string name="phone_number">Phone Number</string>
     <string name="number_of_guests">Number of Guests</string>
     <string name="name">Name</string>
-    <string name="e_mail">E-mail</string>
+    <string name="e_mail">Email</string>
     <string name="add_reservation_action">Add reservation</string>
     <string name="pick_date">Pick Date</string>
     <string name="pick_time">PickTime</string>
@@ -16,6 +17,6 @@
 
     <string name="preferences_label">Preferences</string>
     <string name="email_pref_key">email_pref_key</string>
-    <string name="email_pref_title">E-mail</string>
+    <string name="email_pref_title">Email of administrator</string>
     <string name="email_hint">john.doe@provider.com</string>
 </resources>
