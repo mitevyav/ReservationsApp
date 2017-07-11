@@ -1,4 +1,4 @@
-package com.example.yavor.reservations;
+package com.example.yavor.reservations.reservationinput;
 
 import android.app.Activity;
 import android.app.Dialog;

@@ -1,4 +1,4 @@
-package com.example.yavor.reservations;
+package com.example.yavor.reservations.reservationinput;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.yavor.reservations.R;
 import com.example.yavor.reservations.data.ReservationsContract.ReservationEntry;
 import com.example.yavor.reservations.data.ReservationsDbHelper;
 
