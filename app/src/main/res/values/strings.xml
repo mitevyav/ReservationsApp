@@ -19,4 +19,18 @@
     <string name="email_pref_key">email_pref_key</string>
     <string name="email_pref_title">Email of administrator</string>
     <string name="email_hint">john.doe@provider.com</string>
+
+    <string name="email_subject">Reservation Notification</string>
+    <string name="email_body">\t\t\t Hello Mr\\Mrs, \n\n
+        \t Please check below the reservation details: \n
+        \t Guest Name: %1$s \n
+        \t Number of Guests: %2$s \n
+        \t Phone Number: %3$s \n
+        \t Customer email: %4$s \n
+        \t Date of the reservation: %5$s \n\n
+
+        Thank you for choosing our service!
+    </string>
+    <string name="no_mails_toast">There are no email clients installed.</string>
+    <string name="email_chooser_titles">Send mail...</string>
 </resources>

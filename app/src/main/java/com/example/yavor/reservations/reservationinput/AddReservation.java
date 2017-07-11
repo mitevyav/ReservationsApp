@@ -3,6 +3,7 @@ package com.example.yavor.reservations.reservationinput;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 import com.example.yavor.reservations.R;
 import com.example.yavor.reservations.data.ReservationsContract.ReservationEntry;
 import com.example.yavor.reservations.data.ReservationsDbHelper;
+import com.example.yavor.reservations.preferences.PreferenceUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -85,6 +87,7 @@ public class AddReservation extends AppCompatActivity implements DatePickerDialo
         }
         ContentValues contentValues = getContentValues();
         insertReservationValues(contentValues);
+        sendEmail();
         finish();
     }
 
@@ -157,5 +160,23 @@ public class AddReservation extends AppCompatActivity implements DatePickerDialo
         timeSet = true;
         date.setHours(hourOfDay);
         date.setMinutes(minute);
+    }
+
+    private void sendEmail() {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("message/rfc822");
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{emailInput, PreferenceUtils.getAdminEmail(this)});
+        intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_subject));
+        intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.email_body,
+                guestNameInput,
+                numberOfGuestsInput,
+                phoneNumberInput,
+                emailInput,
+                formatDate()));
+        try {
+            startActivity(Intent.createChooser(intent, getString(R.string.email_chooser_titles)));
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(this, getString(R.string.no_mails_toast), Toast.LENGTH_SHORT).show();
+        }
     }
 }
