@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,14 +20,17 @@
         </activity>
         <activity
             android:name=".reservationinput.AddReservation"
-            android:label="@string/add_reservation_label" />
-        <activity android:name=".preferences.SettingsActivity"
-            android:label="@string/settings_label"/>
+            android:label="@string/add_reservation_label"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".preferences.SettingsActivity"
+            android:label="@string/settings_label"
+            android:screenOrientation="portrait" />
 
         <provider
             android:name="com.example.yavor.reservations.data.ReservationContentProvider"
             android:authorities="com.example.yavor.reservations"
-            android:exported="false"/>
+            android:exported="false" />
     </application>
 
 </manifest>
