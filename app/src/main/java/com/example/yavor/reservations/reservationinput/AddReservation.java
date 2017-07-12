@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.ContentValues;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -20,7 +19,6 @@ import android.widget.Toast;
 
 import com.example.yavor.reservations.R;
 import com.example.yavor.reservations.data.ReservationsContract.ReservationEntry;
-import com.example.yavor.reservations.data.ReservationsDbHelper;
 import com.example.yavor.reservations.preferences.PreferenceUtils;
 
 import java.text.SimpleDateFormat;
@@ -33,6 +31,8 @@ public class AddReservation extends AppCompatActivity implements DatePickerDialo
     private static final String TIME_PICKER_FRAGMENT_TAG = "datePicker";
 
     private static final String DATE_FORMAT = "d MMM hh:mm";
+
+    private static final String MIME_TYPE = "message/rfc822";
 
     private EditText guestNameEditText;
     private EditText phoneNumberEditText;
@@ -96,9 +96,7 @@ public class AddReservation extends AppCompatActivity implements DatePickerDialo
     }
 
     private void insertReservationValues(ContentValues contentValues) {
-        ReservationsDbHelper dbHelper = new ReservationsDbHelper(this);
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        db.insert(ReservationEntry.TABLE_NAME, null, contentValues);
+        getContentResolver().insert(ReservationEntry.CONTENT_URI, contentValues);
     }
 
     private ContentValues getContentValues() {
@@ -164,7 +162,7 @@ public class AddReservation extends AppCompatActivity implements DatePickerDialo
 
     private void sendEmail() {
         Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("message/rfc822");
+        intent.setType(MIME_TYPE);
         intent.putExtra(Intent.EXTRA_EMAIL, new String[]{emailInput, PreferenceUtils.getAdminEmail(this)});
         intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_subject));
         intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.email_body,
