@@ -25,7 +25,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private ReservationsAdapter adapter;
@@ -41,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new ReservationsAdapter(this);
         recyclerView.setAdapter(adapter);
+
 
         viewModel = ViewModelProviders.of(this).get(ReservationViewModel.class);
         viewModel.getAllReservations().observe(this, new Observer<List<Reservation>>() {

@@ -44,7 +44,7 @@ public class AddReservation extends AppCompatActivity implements DatePickerDialo
     private String emailInput;
 
 
-    private ReservationViewModel reservationViewModel;
+    private ReservationViewModel viewModel;
 
     private boolean timeSet = false;
     private boolean dateSet = false;
@@ -61,7 +61,7 @@ public class AddReservation extends AppCompatActivity implements DatePickerDialo
         numberOfGuestsEditText = findViewById(R.id.number_of_guests_edit_text);
         emailEditText = findViewById(R.id.email_edit_text);
 
-        reservationViewModel = ViewModelProviders.of(this).get(ReservationViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(ReservationViewModel.class);
     }
 
 
@@ -89,7 +89,7 @@ public class AddReservation extends AppCompatActivity implements DatePickerDialo
             notifyBlankFields();
             return;
         }
-        reservationViewModel.insert(getReservation());
+        viewModel.insert(getReservation());
         sendEmail();
         finish();
     }
