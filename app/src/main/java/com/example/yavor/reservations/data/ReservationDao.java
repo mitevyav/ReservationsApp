@@ -1,6 +1,7 @@
 package com.example.yavor.reservations.data;
 
 
+import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
@@ -13,8 +14,8 @@ import java.util.List;
 @Dao
 public interface ReservationDao {
 
-    @Query("SELECT * FROM reservation")
-    List<Reservation> getAll();
+    @Query("SELECT * FROM reservations")
+    LiveData<List<Reservation>> getAll();
 
     @Insert
     void insert(Reservation reservation);

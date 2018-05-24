@@ -4,7 +4,9 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
-@Entity
+import java.util.Date;
+
+@Entity(tableName = "reservations")
 public class Reservation {
 
 
@@ -23,8 +25,8 @@ public class Reservation {
     @ColumnInfo(name = "phone_number")
     private String phoneNumber;
 
-    @ColumnInfo(name = "time_stamp")
-    private String timeStamp;
+    @ColumnInfo(name = "date")
+    private Date date;
 
     public String getEmail() {
         return email;
@@ -66,12 +68,12 @@ public class Reservation {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getTimeStamp() {
-        return timeStamp;
+    public Date getDate() {
+        return date;
     }
 
-    public void setTimeStamp(String timeStamp) {
-        this.timeStamp = timeStamp;
+    public void Date(Date date) {
+        this.date = date;
     }
 
 
@@ -83,7 +85,7 @@ public class Reservation {
                 ", guestName='" + guestName + '\'' +
                 ", guestsCount=" + guestsCount +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", timeStamp='" + timeStamp + '\'' +
+                ", date='" + date + '\'' +
                 '}';
     }
 }
