@@ -31,4 +31,7 @@ public class ReservationViewModel extends AndroidViewModel {
         repository.insert(reservation);
     }
 
+    public void delete(Reservation reservation) {
+        repository.delete(reservation);
+    }
 }

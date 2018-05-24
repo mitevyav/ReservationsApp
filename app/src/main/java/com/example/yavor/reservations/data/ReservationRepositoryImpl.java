@@ -32,6 +32,11 @@ public class ReservationRepositoryImpl implements ReservationRepository {
         new insertAsyncTask(reservationDao).execute(reservation);
     }
 
+    @Override
+    public void delete(Reservation reservation) {
+        new deleteAsyncTask(reservationDao).execute(reservation);
+    }
+
 
     private static class insertAsyncTask extends AsyncTask<Reservation, Void, Void> {
 
@@ -44,6 +49,22 @@ public class ReservationRepositoryImpl implements ReservationRepository {
         @Override
         protected Void doInBackground(final Reservation... params) {
             mAsyncTaskDao.insert(params[0]);
+            return null;
+        }
+    }
+
+
+    private static class deleteAsyncTask extends AsyncTask<Reservation, Void, Void> {
+
+        private ReservationDao mAsyncTaskDao;
+
+        deleteAsyncTask(ReservationDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final Reservation... params) {
+            mAsyncTaskDao.delete(params[0]);
             return null;
         }
     }

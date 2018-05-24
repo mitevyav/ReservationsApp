@@ -55,7 +55,7 @@ public class ReservationsAdapter extends RecyclerView.Adapter<ReservationsAdapte
         holder.guestNumber.setText(context.getString(R.string.number_of_guests_label, numberOfGuests));
         holder.timeStamp.setText(timestamp);
 
-        holder.itemView.setTag(id);
+        holder.itemView.setTag(reservation);
     }
 
     @Override

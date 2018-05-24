@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private ReservationsAdapter adapter;
 
-    private ReservationViewModel reservationViewModel;
+    private ReservationViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +42,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         adapter = new ReservationsAdapter(this);
         recyclerView.setAdapter(adapter);
 
-        reservationViewModel = ViewModelProviders.of(this).get(ReservationViewModel.class);
-        reservationViewModel.getAllReservations().observe(this, new Observer<List<Reservation>>() {
+        viewModel = ViewModelProviders.of(this).get(ReservationViewModel.class);
+        viewModel.getAllReservations().observe(this, new Observer<List<Reservation>>() {
             @Override
             public void onChanged(@Nullable List<Reservation> reservations) {
                 adapter.setReservations(reservations);
@@ -121,9 +121,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
 
-                int id = (int) viewHolder.itemView.getTag();
+                Reservation reservation = (Reservation) viewHolder.itemView.getTag();
 
-                // TODO delete on swipe
+                viewModel.delete(reservation);
 
             }
         }).attachToRecyclerView(recyclerView);

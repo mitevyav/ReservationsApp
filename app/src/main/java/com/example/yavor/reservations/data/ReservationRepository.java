@@ -12,4 +12,6 @@ public interface ReservationRepository {
     LiveData<List<Reservation>> getAllReservations();
 
     void insert(Reservation reservation);
+
+    void delete(Reservation reservation);
 }
