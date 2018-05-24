@@ -49,7 +49,6 @@ public class ReservationsAdapter extends RecyclerView.Adapter<ReservationsAdapte
         String name = reservation.getGuestName();
         int numberOfGuests = reservation.getGuestsCount();
         String timestamp = Utils.formatDateForPresentation(reservation.getDate());
-        int id = reservation.getId();
 
         holder.name.setText(context.getString(R.string.guest_name_label, name));
         holder.guestNumber.setText(context.getString(R.string.number_of_guests_label, numberOfGuests));
