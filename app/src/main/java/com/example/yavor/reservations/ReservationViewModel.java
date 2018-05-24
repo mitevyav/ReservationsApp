@@ -1,24 +1,24 @@
 package com.example.yavor.reservations;
 
-import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.ViewModel;
 
 import com.example.yavor.reservations.data.ReservationRepository;
-import com.example.yavor.reservations.data.ReservationRepositoryImpl;
 import com.example.yavor.reservations.data.model.Reservation;
 
 import java.util.List;
 
-public class ReservationViewModel extends AndroidViewModel {
+import javax.inject.Inject;
+
+public class ReservationViewModel extends ViewModel {
 
     private LiveData<List<Reservation>> reservationsList;
 
     private ReservationRepository repository;
 
-    public ReservationViewModel(Application application) {
-        super(application);
-        repository = new ReservationRepositoryImpl(application);
+    @Inject
+    public ReservationViewModel(ReservationRepository repository) {
+        this.repository = repository;
         reservationsList = repository.getAllReservations();
     }
 
