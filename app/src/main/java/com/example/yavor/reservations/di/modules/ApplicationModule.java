@@ -2,18 +2,14 @@ package com.example.yavor.reservations.di.modules;
 
 import android.arch.persistence.room.Room;
 import android.content.Context;
-
-import com.example.yavor.reservations.data.AppDatabase;
-import com.example.yavor.reservations.data.ReservationDao;
-import com.example.yavor.reservations.data.ReservationRepository;
-import com.example.yavor.reservations.data.ReservationRepositoryImpl;
+import com.example.yavor.reservations.data.*;
 import com.example.yavor.reservations.di.ApplicationContext;
 import com.example.yavor.reservations.di.DatabaseInfo;
-
-import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
+
+import javax.inject.Singleton;
+import java.util.concurrent.Executor;
 
 
 @Module
@@ -27,8 +23,8 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    ReservationRepository provideReservationRepository(ReservationDao reservationDao) {
-        return new ReservationRepositoryImpl(reservationDao);
+    ReservationRepository provideReservationRepository(ReservationDao reservationDao, Executor executor) {
+        return new ReservationRepositoryImpl(reservationDao, executor);
     }
 
 
@@ -58,6 +54,13 @@ public class ApplicationModule {
     @DatabaseInfo
     String provideDatabaseName() {
         return "reservations.db";
+    }
+
+
+    @Provides
+    @Singleton
+    Executor provideExecutor() {
+        return new ThreadPoolExecutorImpl();
     }
 
 
