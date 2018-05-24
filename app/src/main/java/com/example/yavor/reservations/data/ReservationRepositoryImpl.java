@@ -1,6 +1,5 @@
 package com.example.yavor.reservations.data;
 
-import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
@@ -16,9 +15,8 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     private LiveData<List<Reservation>> reservationsList;
 
 
-    public ReservationRepositoryImpl(Application application) {
-        AppDatabase db = AppDatabase.getDatabase(application);
-        reservationDao = db.getReservationDao();
+    public ReservationRepositoryImpl(ReservationDao reservationDao) {
+        this.reservationDao = reservationDao;
         reservationsList = reservationDao.getAll();
     }
 
