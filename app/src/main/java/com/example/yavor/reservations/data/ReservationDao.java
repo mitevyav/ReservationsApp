@@ -17,6 +17,7 @@ public interface ReservationDao {
     @Query("SELECT * FROM reservations")
     LiveData<List<Reservation>> getAll();
 
+
     @Insert
     void insert(Reservation reservation);
 
