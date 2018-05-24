@@ -8,7 +8,7 @@ import android.arch.persistence.room.PrimaryKey;
 public class Reservation {
 
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int id;
 
     @ColumnInfo(name = "e_mail")
@@ -72,5 +72,18 @@ public class Reservation {
 
     public void setTimeStamp(String timeStamp) {
         this.timeStamp = timeStamp;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Reservation{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", guestName='" + guestName + '\'' +
+                ", guestsCount=" + guestsCount +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", timeStamp='" + timeStamp + '\'' +
+                '}';
     }
 }
