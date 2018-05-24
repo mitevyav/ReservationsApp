@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.yavor.reservations.data.model.Reservation;
+import com.example.yavor.reservations.utils.Utils;
 
 import java.util.List;
 
@@ -47,7 +48,7 @@ public class ReservationsAdapter extends RecyclerView.Adapter<ReservationsAdapte
 
         String name = reservation.getGuestName();
         int numberOfGuests = reservation.getGuestsCount();
-        String timestamp = reservation.getDate().toString();
+        String timestamp = Utils.formatDateForPresentation(reservation.getDate());
         int id = reservation.getId();
 
         holder.name.setText(context.getString(R.string.guest_name_label, name));

@@ -27,10 +27,6 @@
             android:label="@string/settings_label"
             android:screenOrientation="portrait" />
 
-        <provider
-            android:name="com.example.yavor.reservations.data.ReservationContentProvider"
-            android:authorities="com.example.yavor.reservations"
-            android:exported="false" />
     </application>
 
 </manifest>

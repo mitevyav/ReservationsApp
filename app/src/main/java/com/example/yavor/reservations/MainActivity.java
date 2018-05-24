@@ -1,59 +1,62 @@
 package com.example.yavor.reservations;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.AsyncTaskLoader;
-import android.support.v4.content.Loader;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.yavor.reservations.data.ReservationsContract.ReservationEntry;
+import com.example.yavor.reservations.data.model.Reservation;
 import com.example.yavor.reservations.preferences.PreferenceUtils;
 import com.example.yavor.reservations.preferences.SettingsActivity;
 import com.example.yavor.reservations.reservationinput.AddReservation;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, LoaderManager.LoaderCallbacks<Cursor> {
+import java.util.List;
 
-    private static final int TASK_LOADER_ID = 0;
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+
     private static final String TAG = MainActivity.class.getSimpleName();
+
     private ReservationsAdapter adapter;
+
+    private ReservationViewModel reservationViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.reservations_list_view);
+        RecyclerView recyclerView = findViewById(R.id.reservations_list_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         adapter = new ReservationsAdapter(this);
         recyclerView.setAdapter(adapter);
 
-
+        reservationViewModel = ViewModelProviders.of(this).get(ReservationViewModel.class);
+        reservationViewModel.getAllReservations().observe(this, new Observer<List<Reservation>>() {
+            @Override
+            public void onChanged(@Nullable List<Reservation> reservations) {
+                adapter.setReservations(reservations);
+            }
+        });
         findViewById(R.id.fab).setOnClickListener(this);
 
         setUpDeleteOnSwipe(recyclerView);
-
-        getSupportLoaderManager().initLoader(TASK_LOADER_ID, null, this);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        getSupportLoaderManager().restartLoader(TASK_LOADER_ID, null, this);
     }
 
     @Override
@@ -89,60 +92,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, final Bundle loaderArgs) {
-
-        return new AsyncTaskLoader<Cursor>(this) {
-
-            Cursor reservationData = null;
-
-            @Override
-            protected void onStartLoading() {
-                if (reservationData != null) {
-                    deliverResult(reservationData);
-                } else {
-                    forceLoad();
-                }
-            }
-
-            @Override
-            public Cursor loadInBackground() {
-
-                try {
-                    return getContentResolver().query(ReservationEntry.CONTENT_URI,
-                            null,
-                            null,
-                            null,
-                            null);
-
-                } catch (Exception e) {
-                    Log.e(TAG, "Failed to asynchronously load data.");
-                    e.printStackTrace();
-                    return null;
-                }
-            }
-
-            public void deliverResult(Cursor data) {
-                reservationData = data;
-                super.deliverResult(data);
-            }
-        };
-
-    }
-
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        adapter.swapCursor(data);
-    }
-
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-        adapter.swapCursor(null);
-    }
-
-
     private void startAddReservationActivity() {
         if (!hasAdminEmail()) {
             hasToEnterAdminEmailToast();
@@ -174,13 +123,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 int id = (int) viewHolder.itemView.getTag();
 
-                String stringId = Integer.toString(id);
-                Uri uri = ReservationEntry.CONTENT_URI;
-                uri = uri.buildUpon().appendPath(stringId).build();
-
-                getContentResolver().delete(uri, null, null);
-
-                getSupportLoaderManager().restartLoader(TASK_LOADER_ID, null, MainActivity.this);
+                // TODO delete on swipe
 
             }
         }).attachToRecyclerView(recyclerView);
